@@ -21,18 +21,40 @@ export default async function Home() {
  <Container className="flex flex-wrap z-10 ">
         <div className="flex items-center w-full lg:w-1/2">
           <div className="max-w-2xl mb-8">
-            <h1 className="text-4xl font-bold leading-snug tracking-tight text-[#0d0401] lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-              Welcome to <br/>
-              <span className="text-[#2968A3]">Teater el Na&#39;ma</span>
-            </h1>
+          {session?.user ? (
+             <h1 className="text-4xl font-bold leading-snug tracking-tight text-[#0d0401] lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
+             Welcome <br/>
+             <span className="text-[#2968A3]">
+              {session?.user.name}!
+             </span>
+           </h1>
+          ): (
+             <h1 className="text-4xl font-bold leading-snug tracking-tight text-[#0d0401] lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
+
+             
+             Welcome to <br/>
+             <span className="text-[#2968A3]">Teater el Na&#39;ma</span>
+           </h1>
+          )}
+          
+           
             <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
               Website berisi informasi tentang Teater el Na&#39;ma, berisi penjelasan Sejarah Seni Teater, jenis-jenis seni teater, dan lain-lain.
             </p>
 
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
-            <Link href='/sign-up' className={buttonVariants({ variant: 'blue', size: 'lg'})}>
+
+            {session?.user ? (
+          <Link href='/' className={buttonVariants({ variant: 'yellow', size: 'lg'})}>
+          Explore Now
+        </Link>
+        ) : (
+          <Link href='/sign-up' className={buttonVariants({ variant: 'blue', size: 'lg'})}>
             Register
           </Link>
+        )}
+
+            
               <a
                 href="https://www.instagram.com/teaterelnama/"
                 target="_blank"
