@@ -30,6 +30,7 @@ const FormSchema = z
     confirmPassword: z.string().min(1, 'Password confirmation is required'),
     kelas: z.string().min(1, 'Kelas is required').max(3),
     jurusan: z.string().min(1, 'Jurusan is required').max(3),
+    role: z.string().min(1, 'Role is required').max(5),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
@@ -46,8 +47,9 @@ const SignUpForm = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      kelas: '',
+      kelas: '10',
       jurusan: 'IPA',
+      role: 'USER'
     },
   });
 
@@ -64,17 +66,26 @@ const SignUpForm = () => {
         email: values.email,
         password: values.password,
         kelas: values.kelas,
-        jurusan: values.jurusan
+        jurusan: values.jurusan,
+        role: values.role
       })
     })
 
     if (response.ok) {
       router.push('/sign-in')
+      toast({
+        title: 'Success',
+        description: 'Registration Success',
+        variant: 'success'
+      });
     } else {
+
+      const msg = await response.json();
+
       // console.error('Registration Failed')
       toast({
         title: 'Error',
-        description: 'Registration Failed',
+        description: msg.message,
         variant: 'destructive'
       });
     }
@@ -109,9 +120,9 @@ const SignUpForm = () => {
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder='johndoe' {...field} />
+                  <Input placeholder='Your Name' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

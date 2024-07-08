@@ -20,6 +20,21 @@ model User {
   password String
   kelas String
   jurusan String
+  role String
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
+}
+
+model Materi {
+  id     Int      @id @default(autoincrement())
+  title  String
+  content String
+  images Images[]
+}
+
+model Images {
+  id     Int      @id @default(autoincrement())
+  url    String
+  materi Materi @relation(fields: [materiId], references: [id])
+  materiId Int
 }

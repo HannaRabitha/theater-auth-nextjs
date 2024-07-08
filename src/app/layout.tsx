@@ -22,9 +22,11 @@ export default function RootLayout({
       <body className={inter.className}>
 
         <Provider>
-        <main className='h-screen w-full flex flex-col justify-center items-center'>
+        <main className='h-screen w-full flex flex-col'>
           <Navbar />
+          <div className='mt-24'>
           {children}
+          </div>
         </main>
         <Toaster />
         </Provider>

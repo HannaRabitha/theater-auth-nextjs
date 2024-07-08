@@ -44,7 +44,7 @@ const SignInForm = () => {
     const signInData = await signIn('credentials', {
       email: values.email,
       password: values.password,
-      redirect: false,
+      redirect: true,
     });
   
    if (signInData?.error) {
@@ -54,6 +54,13 @@ const SignInForm = () => {
       variant: 'destructive',
     });
     } else {
+
+      toast({
+        title: 'Success',
+        description: 'You have successfully signed in!',
+        variant: 'success',
+      });
+
       router.push('/');
     }
   };

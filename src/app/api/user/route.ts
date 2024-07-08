@@ -14,12 +14,13 @@ const userSchema = z
       .min(8, 'Password must have than 8 characters'),
       kelas: z.string().min(1, 'Kelas is required').max(3),
     jurusan: z.string().min(1, 'Jurusan is required').max(3),
+    role: z.string().min(1, 'Role is required').max(5),
   });
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const {name, email, password, kelas , jurusan } = userSchema.parse(body);
+        const {name, email, password, kelas , jurusan, role } = userSchema.parse(body);
 
         //check if email already exist
         const existingUserByEmail = await db.user.findUnique({
@@ -40,6 +41,7 @@ export async function POST(req: Request) {
               password: hashedPassword,
               kelas,
               jurusan,
+              role
             },
           });
           
@@ -58,4 +60,9 @@ export async function POST(req: Request) {
             {status: 500})
     }
     
+}
+
+export async function GET() {
+    const users = await db.user.findMany();
+    return NextResponse.json({users});
 }

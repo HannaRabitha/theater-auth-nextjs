@@ -5,19 +5,53 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import heroImg from "../../public/assets/hero.png";
-import wayangImg from "../../public/assets/wayang.png";
-import elFullLogo from "../../public/assets/elfull-logo.png";
+import cloudImg  from "../../public/assets/cloud.png";
 import footerImg from "../../public/assets/footer.png";
 import wayang2 from "../../public/assets/wayang-2.png";
+import Provider from '@/components/Provider';
+import { map } from "zod";
+import MenuSection from "@/components/MenuSection";
+
+
 
 export default async function Home() {
 
+  let isAdmin = false;
   const session = await getServerSession(authOptions);
+  
+  if (session?.user.name == 'admin') {
+    isAdmin = true;
+  }
 
+
+  const menu = [{
+    id: 1,
+    category: 'Sejarah',
+    title: 'Seni Teater',
+    description: 'Sejarah seni teater telah dipertunjukkan sejak abad kelima zaman Yunani Kuno. Pertunjukan-pertunjukan drama berlangsung di berbagai teater seperti Dionisos, Akropolis, Athena, Yunani. Teater tersebut menjadi salah satu bentuk hiburan paling populer di Yunani.',
+    imageUrl: 'https://binus.ac.id/wp-content/uploads/2021/09/235-1-cerdikacom.jpg',
+    link: '/sejarah-seni-teater'
+  },
+  {
+    id: 2,
+    category: 'Jenis-Jenis',
+    title: 'Seni Teater',
+    description: 'Teater Tradisional, Teater Modern, Teater Musikal, Teater Monolog, Teater Komedi, Teater Drama, Teater Tari, Teater Boneka, Teater Sandiwara, Teater Opera, Teater Wayang',
+    imageUrl: 'https://konten.usu.ac.id/storage/posts/18823/Grid%20Konser%20Prodi%20Etnomusikologi%20FIB%20USU.jpeg',
+    link: '/sejarah-seni-teater'
+  },
+  
+  {
+    id: 3,
+    category: 'Tentang',
+    title: 'Teater Elnama',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien fermentum aliquam. Nullam nec nunc nec nunc.',
+    imageUrl: 'https://statik.tempo.co/data/2024/05/03/id_1299334/1299334_720.jpg',
+    link: '/sejarah-seni-teater'
+  },]
 
   return (<>
-  <div className="flex flex-col h-fit mt-36 justify-between">
+<div className="flex flex-col h-fit">
  <Container className="flex flex-wrap z-10 ">
         <div className="flex items-center w-full lg:w-1/2">
           <div className="max-w-2xl mb-8">
@@ -30,8 +64,6 @@ export default async function Home() {
            </h1>
           ): (
              <h1 className="text-4xl font-bold leading-snug tracking-tight text-[#0d0401] lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-
-             
              Welcome to <br/>
              <span className="text-[#2968A3]">Teater el Na&#39;ma</span>
            </h1>
@@ -44,16 +76,22 @@ export default async function Home() {
 
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
 
-            {session?.user ? (
-          <Link href='/' className={buttonVariants({ variant: 'yellow', size: 'lg'})}>
-          Explore Now
-        </Link>
-        ) : (
-          <Link href='/sign-up' className={buttonVariants({ variant: 'blue', size: 'lg'})}>
-            Register
-          </Link>
-        )}
-
+              {isAdmin? (
+                <Link href='/admin' className={buttonVariants({ variant: 'yellow', size: 'lg'})}>
+                  Admin Dashboard
+                </Link>
+              ): ( <>
+                {session?.user ? (
+                  <Link href='/' className={buttonVariants({ variant: 'yellow', size: 'lg'})}>
+                  Explore Now
+                </Link>
+                ) : (
+                  <Link href='/sign-up' className={buttonVariants({ variant: 'blue', size: 'lg'})}>
+                    Register
+                  </Link>
+                )}
+                </>
+              )}
             
               <a
                 href="https://www.instagram.com/teaterelnama/"
@@ -66,7 +104,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center w-full lg:w-1/2">
+        <div className="lg:flex items-center justify-center w-full hidden lg:w-1/2">
           <div className="">
             <Image
               src={wayang2}
@@ -112,8 +150,47 @@ export default async function Home() {
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 20244 <a href="https://flowbite.com/" className="hover:underline">ITDigital™</a>. All Rights Reserved.</span>
     </div> */}
       {/* </Container> */}
-      <div className="-mt-36 z-0">
-      <Image
+
+      <div className="static">
+      <div className="-mt-18 lg:-mt-40 z-0">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#a2d9ff" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,181.3C320,181,400,139,480,133.3C560,128,640,160,720,165.3C800,171,880,149,960,133.3C1040,117,1120,107,1200,106.7C1280,107,1360,117,1400,122.7L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+      </svg>
+
+        <div className="absolute top-0 lg:bottom-0">
+       
+          <Image
+              src={cloudImg}
+              className={"object-cover"}
+              alt="Hero Illustration"
+              width="1920"
+              loading="eager"
+              placeholder="blur"
+            />
+         
+        </div>
+      </div>
+
+      </div>
+
+      
+
+        
+        
+
+        {menu.map((item) => {
+          return (
+           <>
+           <Container className="gap-y-4 pt-0 mt-0 bg-[#a2d9ff] pb-10">
+            <MenuSection data={item} key={item.id}/>
+            </Container>
+           </>
+          );
+        })}
+      
+
+    <div className="lg:-mt-36 -mt-20 z-0">
+    <Image
               src={footerImg}
               className={"object-cover"}
               alt="Hero Illustration"
@@ -122,7 +199,7 @@ export default async function Home() {
               placeholder="blur"
             />
             </div>
-            </div>
+    </div>
   
   </>);
 

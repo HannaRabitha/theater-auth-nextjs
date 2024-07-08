@@ -53,6 +53,7 @@ export const authOptions: NextAuthOptions = {
                 name: existingUser.name,
                 kelas: existingUser.kelas,
                 jurusan: existingUser.jurusan,
+                role: existingUser.role
             }
           }
         })
