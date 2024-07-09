@@ -55,6 +55,10 @@ export default async function Home() {
  <Container className="flex flex-wrap z-10 ">
         <div className="flex items-center w-full lg:w-1/2">
           <div className="max-w-2xl mb-8">
+
+
+          <div className="flex justify-between w-full items-end">
+          <div>
           {session?.user ? (
              <h1 className="text-4xl font-bold leading-snug tracking-tight text-[#0d0401] lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
              Welcome <br/>
@@ -68,8 +72,23 @@ export default async function Home() {
              <span className="text-[#2968A3]">Teater el Na&#39;ma</span>
            </h1>
           )}
+
+          </div>
+
+          <div className="lg:hidden flex">
+              <Image
+              src={wayang2}
+              width="150"
+              height="150"
+              className={"object-cover"}
+              alt="Hero Illustration"
+              loading="eager"
+              placeholder="blur"
+            />
+            </div>
+
+            </div>
           
-           
             <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
               Website berisi informasi tentang Teater el Na&#39;ma, berisi penjelasan Sejarah Seni Teater, jenis-jenis seni teater, dan lain-lain.
             </p>
@@ -151,13 +170,13 @@ export default async function Home() {
     </div> */}
       {/* </Container> */}
 
-      <div className="static">
+      <div className="relative">
       <div className="-mt-18 lg:-mt-40 z-0">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
       <path fill="#a2d9ff" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,181.3C320,181,400,139,480,133.3C560,128,640,160,720,165.3C800,171,880,149,960,133.3C1040,117,1120,107,1200,106.7C1280,107,1360,117,1400,122.7L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
       </svg>
 
-        <div className="absolute top-0 lg:bottom-0">
+        <div className="absolute bottom-0">
        
           <Image
               src={cloudImg}
@@ -171,19 +190,14 @@ export default async function Home() {
         </div>
       </div>
 
+
       </div>
-
-      
-
-        
-        
-
         {menu.map((item) => {
           return (
            <>
-           <Container className="gap-y-4 pt-0 mt-0 bg-[#a2d9ff] pb-10">
+           <div className="gap-y-4 -mt-4 pt-8 mt-0 bg-[#a2d9ff] w-full pb-10">
             <MenuSection data={item} key={item.id}/>
-            </Container>
+            </div>
            </>
           );
         })}

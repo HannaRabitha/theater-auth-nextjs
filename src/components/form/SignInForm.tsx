@@ -44,7 +44,7 @@ const SignInForm = () => {
     const signInData = await signIn('credentials', {
       email: values.email,
       password: values.password,
-      redirect: true,
+      redirect: false,
     });
   
    if (signInData?.error) {
@@ -61,7 +61,7 @@ const SignInForm = () => {
         variant: 'success',
       });
 
-      router.push('/');
+      window.location.href = '/';
     }
   };
 
