@@ -63,34 +63,10 @@ export async function POST(req: Request) {
 
 // GET DATA FROM SUPABASE STORAGE
 
-export async function GET(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
-
+export async function GET(req: Request) {
     console.log('req');
     
-    
-    
     return NextResponse.json({ message: 'HEllo world' });
-
-    
-
-
-    // //GET DATA FROM SUPABASE STORAGE
-    //   const { data, error } = await supabase.storage
-    //     .from('imageMateri')
-    //     .list(`public/${_materiId}/`, {
-    //         limit: 100,
-    //         offset: 0
-    //     });
-
-    //     if (error) {
-    //         return NextResponse.json({ error: error.message });
-    //     }
-
-    //     return NextResponse.json(data);
-  
 }
 
 
