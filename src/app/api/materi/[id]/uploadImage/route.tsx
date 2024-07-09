@@ -8,13 +8,6 @@ import { supabase } from '@/utils/supabase/client';
 import { v4 as uuidv4 } from 'uuid';
 
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-
 export async function POST(req: Request) {
 
     //format formdata 
