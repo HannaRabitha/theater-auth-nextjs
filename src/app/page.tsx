@@ -30,7 +30,7 @@ export default async function Home() {
     title: 'Seni Teater',
     description: 'Sejarah seni teater telah dipertunjukkan sejak abad kelima zaman Yunani Kuno. Pertunjukan-pertunjukan drama berlangsung di berbagai teater seperti Dionisos, Akropolis, Athena, Yunani. Teater tersebut menjadi salah satu bentuk hiburan paling populer di Yunani.',
     imageUrl: 'https://binus.ac.id/wp-content/uploads/2021/09/235-1-cerdikacom.jpg',
-    link: '/sejarah-seni-teater'
+    link: '/content/1'
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ export default async function Home() {
     title: 'Seni Teater',
     description: 'Teater Tradisional, Teater Modern, Teater Musikal, Teater Monolog, Teater Komedi, Teater Drama, Teater Tari, Teater Boneka, Teater Sandiwara, Teater Opera, Teater Wayang',
     imageUrl: 'https://konten.usu.ac.id/storage/posts/18823/Grid%20Konser%20Prodi%20Etnomusikologi%20FIB%20USU.jpeg',
-    link: '/sejarah-seni-teater'
+    link: '/content/2'
   },
   
   {
@@ -174,7 +174,7 @@ export default async function Home() {
       <div className="relative">
       <div className="-mt-18 lg:-mt-40 z-0">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#a2d9ff" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,181.3C320,181,400,139,480,133.3C560,128,640,160,720,165.3C800,171,880,149,960,133.3C1040,117,1120,107,1200,106.7C1280,107,1360,117,1400,122.7L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+      <path fill="#a2d9ff" fillOpacity="1" d="M0,96L40,117.3C80,139,160,181,240,181.3C320,181,400,139,480,133.3C560,128,640,160,720,165.3C800,171,880,149,960,133.3C1040,117,1120,107,1200,106.7C1280,107,1360,117,1400,122.7L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
       </svg>
         <div className="absolute mb-6 bottom-0">
           <Image
