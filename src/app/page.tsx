@@ -45,9 +45,9 @@ export default async function Home() {
     id: 3,
     category: 'Tentang',
     title: 'Teater Elnama',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien fermentum aliquam. Nullam nec nunc nec nunc.',
+    description: 'Teater ELnama Indonesia. Sebuah teater independen yang dibangun di atas wilayah kreatifitas yang bebas dan terbuka.',
     imageUrl: 'https://statik.tempo.co/data/2024/05/03/id_1299334/1299334_720.jpg',
-    link: '/sejarah-seni-teater'
+    link: '/about'
   },]
 
   return (<>
@@ -101,7 +101,7 @@ export default async function Home() {
                 </Link>
               ): ( <>
                 {session?.user ? (
-                  <Link href='/' className={buttonVariants({ variant: 'yellow', size: 'lg'})}>
+                  <Link href='#menu' className={buttonVariants({ variant: 'yellow', size: 'lg'})}>
                   Explore Now
                 </Link>
                 ) : (
@@ -170,14 +170,13 @@ export default async function Home() {
     </div> */}
       {/* </Container> */}
 
+      <section id="menu">
       <div className="relative">
       <div className="-mt-18 lg:-mt-40 z-0">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
       <path fill="#a2d9ff" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,181.3C320,181,400,139,480,133.3C560,128,640,160,720,165.3C800,171,880,149,960,133.3C1040,117,1120,107,1200,106.7C1280,107,1360,117,1400,122.7L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
       </svg>
-
-        <div className="absolute bottom-0">
-       
+        <div className="absolute mb-6 bottom-0">
           <Image
               src={cloudImg}
               className={"object-cover"}
@@ -189,9 +188,15 @@ export default async function Home() {
          
         </div>
       </div>
-
-
+      <h1 className="text-2xl bg-[#a2d9ff] font-bold text-center leading-snug tracking-tight text-[#2968A3] lg:text-3xl lg:leading-tight xl:text-4xl xl:leading-tight dark:text-white">
+      Reading Section
+      </h1>
+      
       </div>
+
+     
+
+     
         {menu.map((item) => {
           return (
            <>
@@ -201,6 +206,8 @@ export default async function Home() {
            </>
           );
         })}
+
+        </section>
       
 
     <div className="lg:-mt-36 -mt-20 z-0">
