@@ -113,8 +113,8 @@ const SignUpForm = () => {
   return (
     <div className='w-full'>
     <Form {...form} >
-      <form onSubmit={form.handleSubmit(onSubmit)} className='w-full mt-10'>
-        <div className='space-y-2 mt-10'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
+        <div className='space-y-2'>
           <FormField
             control={form.control}
             name='name'
