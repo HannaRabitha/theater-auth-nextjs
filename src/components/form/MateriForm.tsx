@@ -16,6 +16,11 @@ import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../ui/use-toast';
 import { Textarea } from '@headlessui/react';
+import React, { useState } from 'react';
+// import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const FormSchema = z.object({
     title: z.string().min(1, 'Title is required').max(100),
@@ -24,6 +29,9 @@ const FormSchema = z.object({
 
 
 const MateriForm = () => {
+  
+    const [value, setValue] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { toast } = useToast();
 
@@ -31,14 +39,15 @@ const MateriForm = () => {
         resolver: zodResolver(FormSchema),
         defaultValues: {
             title: '',
-            content: '',
+            content: value,
         },
     });
 
     const onSubmit = async (values: z.infer<typeof FormSchema>) => {
       
-        console.log(values);
+        // console.log(values);
 
+        setLoading(true);
         const response = await fetch('/api/materi', {
             method: 'POST',
             headers: {
@@ -51,6 +60,7 @@ const MateriForm = () => {
             router.push('/admin/materi-list');
           } else {
             // console.error('Registration Failed')
+            setLoading(false);
             toast({
               title: 'Error',
               description: 'Add Materi Failed',
@@ -62,11 +72,16 @@ const MateriForm = () => {
 
 
     return (
-      
+      <>
+      {loading ? (
+        <div className='flex justify-center items-center w-full h-full'>
+          <div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#2968A3]'></div>
+        </div>
+      ) : (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='w-full mt-10'>
-              
-        <div className='space-y-2'>
+          
+        <div className='flex flex-col gap-y-4'>
           <FormField
             control={form.control}
             name='title'
@@ -85,35 +100,38 @@ const MateriForm = () => {
             control={form.control}
             name='content'
             render={({ field }) => (
-              <FormItem className='flex flex-col'>
+              <FormItem className='flex flex-col h-80'>
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Textarea 
+                <ReactQuill className='h-full mt-1' theme="snow" {...field} placeholder='Isi Konten Materi' />
+                  {/* <Textarea 
                   className="mt-2 h-80 border border-gray-300 rounded-md p-2"
-                  {...field} placeholder='Isi Konten Materi' />
+                  {...field} placeholder='Isi Konten Materi' /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
             />
 
-          </div>
+            {/* <div className='h-80 my-6'>
+            <FormLabel>Content</FormLabel>
+            <ReactQuill className='h-full' theme="snow" value={value} onChange={setValue} />
+            </div> */}
 
-          <div className='flex gap-4'>
-            <Button className='w-full mt-6' type='button' onClick={() => router.push('/admin/materi-list')}>
+          <div className='flex mt-20 gap-4'>
+            <Button className='w-full' type='button' onClick={() => router.push('/admin/materi-list')}>
             Batal
             </Button>
-          <Button className='w-full mt-6' type='submit'>
+          <Button className='w-full' type='submit'>
           Simpan
         </Button>
-
           </div>
-
-       
-
-
+        </div>
     </form>
-            </Form>
+    </Form>
+    )}
+      
+    </>
     );
 };
 

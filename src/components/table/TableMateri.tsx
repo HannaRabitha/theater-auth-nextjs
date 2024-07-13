@@ -15,23 +15,27 @@ import { Container } from "@/components/ui/container";
 import { toast } from "@/components/ui/use-toast";
 import { Button, IconButton } from "@mui/material";
 import { EditIcon } from "lucide-react";
+import { set } from "zod";
 
 
 const TableMateri = () => {
     
     const [rows, setRows] = useState<any[]>([]); // Updated to use useState
     const [showModal, setShowModal] = useState(false); // Updated to use useState
+    const [isLoading, setIsLoading] = useState(true); // Step 1: Initialize loading state
+
 
     // Fetch materi data
     useEffect(() => {
         const fetchData = async () => {
             try {
-                
+                setIsLoading(true); // Step 2: Set loading state to true
                 const response = await fetch('/api/materi'); // Adjust the API endpoint as needed
                 const data = await response.json();
                 console.log(data, 'data');
                 
                 setRows(data); // Assuming the API returns an array of materi
+                setIsLoading(false); // Step 3: Set loading state to false
             } catch (error) {
                 console.error("Failed to fetch materi:", error);
                 toast({
@@ -42,9 +46,10 @@ const TableMateri = () => {
                 })
             }
         };
-
         fetchData();
     }, []); //
+
+
 
 
     return (
@@ -60,6 +65,11 @@ const TableMateri = () => {
         </Button>
         </div>
 
+        {isLoading ? (
+            <div className='flex justify-center items-center w-full h-full'>
+            <div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#2968A3]'></div>
+            </div>
+        ) : (
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -91,6 +101,7 @@ const TableMateri = () => {
         </TableBody>
       </Table>
     </TableContainer>
+        )}
 
     </Container>
         </>
