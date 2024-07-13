@@ -14,7 +14,7 @@ import Paper from '@mui/material/Paper';
 import { Container } from "@/components/ui/container";
 import { toast } from "@/components/ui/use-toast";
 import { Button, IconButton } from "@mui/material";
-import { EditIcon } from "lucide-react";
+import { DeleteIcon, EditIcon, TrashIcon } from "lucide-react";
 import { set } from "zod";
 
 
@@ -82,18 +82,22 @@ const TableMateri = () => {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="right">{row.title}</TableCell>
               <TableCell align="right">{row.content}</TableCell>
               <TableCell align="right">
-              <IconButton aria-label="check" className="icon" href={`/admin/materi-edit/${row.id}`}>
+              <IconButton style={
+                {color: 'green'}
+              } aria-label="check" className="icon" href={`/admin/materi-edit/${row.id}`}>
                 <EditIcon className="checkIcon"/>
               </IconButton>
-                <Button variant="contained" href={`/admin/materi-delete/${row.id}`}>
-                  Delete
-                </Button>
+                <IconButton style={
+                  {color: 'red'}
+                } aria-label="check" className="icon" href={`/admin/materi-delete/${row.id}`}>
+                <TrashIcon className="checkIcon" />
+              </IconButton>
               </TableCell>
              
             </TableRow>

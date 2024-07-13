@@ -39,7 +39,7 @@ const MateriForm = () => {
         resolver: zodResolver(FormSchema),
         defaultValues: {
             title: '',
-            content: value,
+            content: '',
         },
     });
 

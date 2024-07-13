@@ -13,7 +13,9 @@ const page = async () => {
 
     return (
     <Container>
-      <TableMateri />
+      <TableMateri key={
+        Math.random()
+      } />
     </Container>
     );
 }
