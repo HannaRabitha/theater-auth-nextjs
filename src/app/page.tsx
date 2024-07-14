@@ -48,7 +48,16 @@ export default async function Home() {
     description: 'Teater ELnama Indonesia. Sebuah teater independen yang dibangun di atas wilayah kreatifitas yang bebas dan terbuka.',
     imageUrl: 'https://statik.tempo.co/data/2024/05/03/id_1299334/1299334_720.jpg',
     link: '/about'
-  },]
+  },
+  {
+    id: 3,
+    category: 'Semua Materi',
+    title: 'Materi lainnya...',
+    description: 
+    'Klik disini untuk melihat semua materi yang ada di website ini. Materi yang ada di website ini berisi tentang sejarah seni teater, jenis-jenis seni teater, dan lain-lain.',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg',
+    link: '/all-materi'
+  }]
 
   return (<>
 <div className="flex flex-col h-fit">
@@ -194,9 +203,7 @@ export default async function Home() {
       
       </div>
 
-     
 
-     
         {menu.map((item) => {
           return (
            <>

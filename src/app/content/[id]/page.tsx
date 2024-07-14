@@ -1,10 +1,22 @@
 import JenisJenis from "@/components/content/JenisJenis";
 import Sejarah from "@/components/content/Sejarah";
+import ContentSection from "@/components/ContentSection";
 import { Container } from "@/components/ui/container";
+import { db } from "@/lib/db";
 
 
-export default function page({ params }: { params: { id: string } }) {
+const page = async({ params }: { params: { id: string } }) => {
     let componentToRender;
+
+    let id = params.id;
+    let data = await db.materi.findUnique({
+        where: {
+            id: parseInt(id),
+        },
+    });
+
+    console.log(data, 'data');
+    
 
     switch (params.id) {
         case "1":
@@ -14,7 +26,7 @@ export default function page({ params }: { params: { id: string } }) {
             componentToRender = <JenisJenis />;
             break;
         default:
-            componentToRender = <p>Content not found</p>;
+            componentToRender = <ContentSection data={data} />;
     }
 
     return (
@@ -23,3 +35,5 @@ export default function page({ params }: { params: { id: string } }) {
         </Container>
     );
 }
+
+export default page;

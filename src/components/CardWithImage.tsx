@@ -5,7 +5,7 @@ import { getServerSession } from 'next-auth';
 import { Container } from './ui/container';
 
 
-const MenuSection = async ({data}: any
+const CardWithImage = async ({data}: any
 ) => {    
     const session = await getServerSession(authOptions);
 
@@ -35,10 +35,11 @@ const MenuSection = async ({data}: any
             </div>
 
             {session?.user ? (
-                 <a className="flex items-baseline mt-3 text-blue-600 hover:text-blue-900 focus:text-blue-900" href={data.link}>
-                 <span>Read More</span>
-                 <span className="text-xs ml-1">&#x279c;</span>
-             </a>
+            <Link href={`/content/${data.id}`} className="text-blue-600 hover:text-blue-900 focus:text-blue-900">
+                     Read More
+                     <span className="text-xs ml-1">&#x279c;</span>
+                 
+            </Link>
             ) : (
                 <Link href='/sign-in' className="text-blue-600 hover:text-blue-900 focus:text-blue-900">
                    Sign In to Read More
@@ -56,4 +57,4 @@ const MenuSection = async ({data}: any
   );
 };
 
-export default MenuSection;
+export default CardWithImage;

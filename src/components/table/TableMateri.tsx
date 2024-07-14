@@ -101,10 +101,10 @@ const TableMateri = () => {
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell align="right">JUDUL</TableCell>
-            <TableCell align="right">CONTENT</TableCell>
-            <TableCell align="right">ACTION</TableCell>
+          <TableRow className="">
+            <TableCell align="left">JUDUL</TableCell>
+            <TableCell className="w-2/3" align="center">CONTENT</TableCell>
+            <TableCell align="center">ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -113,9 +113,12 @@ const TableMateri = () => {
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell align="right">{row.title}</TableCell>
-              <TableCell align="right">{row.content}</TableCell>
-              <TableCell align="right">
+              <TableCell align="left">{row.title}</TableCell>
+              <TableCell className="w-2/3" align="left">
+                <div dangerouslySetInnerHTML={{ __html: row.description }}>
+                </div>
+              </TableCell>
+              <TableCell align="center">
               <IconButton style={
                 {color: 'green'}
               } aria-label="check" className="icon" href={`/admin/materi-edit/${row.id}`}>

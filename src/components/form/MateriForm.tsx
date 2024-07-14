@@ -24,13 +24,13 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const FormSchema = z.object({
     title: z.string().min(1, 'Title is required').max(100),
-    content: z.string().min(1, 'Content is required'),
+    description: z.string().min(1, 'Content is required'),
+    category: z.string().min(1, 'Category is required'),
+    link  : z.string().min(1, 'Link is required'),
 });
 
 
 const MateriForm = () => {
-  
-    const [value, setValue] = useState('');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { toast } = useToast();
@@ -39,7 +39,9 @@ const MateriForm = () => {
         resolver: zodResolver(FormSchema),
         defaultValues: {
             title: '',
-            content: '',
+            description: '',
+            category: 'abc',
+            link: 'link'
         },
     });
 
@@ -98,7 +100,7 @@ const MateriForm = () => {
 
           <FormField
             control={form.control}
-            name='content'
+            name='description'
             render={({ field }) => (
               <FormItem className='flex flex-col h-80'>
                 <FormLabel>Content</FormLabel>

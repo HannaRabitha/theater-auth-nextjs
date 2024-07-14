@@ -27,9 +27,11 @@ model User {
 
 model Materi {
   id     Int      @id @default(autoincrement())
+  category String
   title  String
-  content String
-  images Images[]
+  description String
+  imageUrl Images[]
+  link String
 }
 
 model Images {

@@ -22,7 +22,11 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     const id = params.id;
     const body = await req.json();
-    const { title, content } = body;
+    const { title, 
+        category, 
+        description, 
+        link
+     } = body;
 
     const updatedMateri = await db.materi.update({
         where: {
@@ -30,7 +34,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         },
         data: {
             title,
-            content
+            category,
+            description,
+            link
         }
     });
 

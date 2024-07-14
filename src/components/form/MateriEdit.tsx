@@ -27,7 +27,9 @@ const MateriEditForm = ({params}: any) => {
     const [dataMateri, setDataMateri] = useState<any>({
         id: '',
         title: '',
-        Content: ''
+        category: '',
+        description: '',
+        link: ''
     });
 
     // const form = useForm<z.infer<typeof FormSchema>>({
@@ -174,7 +176,7 @@ const MateriEditForm = ({params}: any) => {
         <FormGroup className='h-80'>
             <FormControl>
             <FormLabel htmlFor="title">Content</FormLabel>
-                <ReactQuill className='h-64 mt-1' theme="snow" value={dataMateri.content}
+                <ReactQuill className='h-64 mt-1' theme="snow" value={dataMateri.description}
                 onChange={(value) => {
                     setDataMateri({
                         ...dataMateri,
