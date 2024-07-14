@@ -36,3 +36,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     return NextResponse.json(updatedMateri);
 }
+
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+    const id = params.id;
+
+    const deletedMateri = await db.materi.delete({
+        where: {
+            id: parseInt(id)
+        }
+    });
+
+    return NextResponse.json(deletedMateri);
+}

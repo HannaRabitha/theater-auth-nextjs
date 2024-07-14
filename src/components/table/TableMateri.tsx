@@ -50,6 +50,34 @@ const TableMateri = () => {
     }, []); //
 
 
+    function onDelete(id: any){
+      const deleteData = async () => {
+        try {
+            const response = await fetch(`/api/materi/${id}`, {
+              method: 'DELETE',
+              headers: {
+                'Content-type': 'application/json'
+              }
+            });
+            const data = await response.json();
+            console.log(data, 'data');
+            toast({
+              title: 'Success',
+              description: 'Delete Materi Success',
+              variant: 'success'
+            });
+            window.location.reload();
+        } catch (error) {
+            console.error("Failed to fetch materi:", error);
+            toast({
+                title: 'Error',
+                description: 'Failed to fetch materi',
+                variant: 'destructive'
+            
+            })
+        }
+      }
+    }
 
 
     return (
@@ -95,7 +123,11 @@ const TableMateri = () => {
               </IconButton>
                 <IconButton style={
                   {color: 'red'}
-                } aria-label="check" className="icon" href={`/admin/materi-delete/${row.id}`}>
+                } aria-label="check" className="icon" 
+                onClick={
+                  () => {
+                      onDelete(row.id);
+                  }}>
                 <TrashIcon className="checkIcon" />
               </IconButton>
               </TableCell>
