@@ -40,15 +40,14 @@ export default async function Home() {
     imageUrl: 'https://konten.usu.ac.id/storage/posts/18823/Grid%20Konser%20Prodi%20Etnomusikologi%20FIB%20USU.jpeg',
     link: '/content/2'
   },
-  
-  {
-    id: 3,
-    category: 'Tentang',
-    title: 'Teater Elnama',
-    description: 'Teater ELnama Indonesia. Sebuah teater independen yang dibangun di atas wilayah kreatifitas yang bebas dan terbuka.',
-    imageUrl: 'https://statik.tempo.co/data/2024/05/03/id_1299334/1299334_720.jpg',
-    link: '/about'
-  },
+  // {
+  //   id: 3,
+  //   category: 'Tentang',
+  //   title: 'Teater Elnama',
+  //   description: 'Teater ELnama Indonesia. Sebuah teater independen yang dibangun di atas wilayah kreatifitas yang bebas dan terbuka.',
+  //   imageUrl: 'https://statik.tempo.co/data/2024/05/03/id_1299334/1299334_720.jpg',
+  //   link: '/about'
+  // },
   {
     id: 3,
     category: 'Semua Materi',
@@ -57,7 +56,15 @@ export default async function Home() {
     'Klik disini untuk melihat semua materi yang ada di website ini. Materi yang ada di website ini berisi tentang sejarah seni teater, jenis-jenis seni teater, dan lain-lain.',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg',
     link: '/all-materi'
-  }]
+  },
+{
+  id: 4,
+  category: 'Challenge',
+  title: 'Quiz',
+  description: 'Klik disini untuk mengikuti quiz tentang seni teater. Quiz ini berisi tentang pertanyaan-pertanyaan seputar seni teater.',
+  imageUrl: 'https://www.pngitem.com/pimgs/m/9-90322_quiz-transparent-background-hd-png-download.png',
+  link: '/quiz'
+}]
 
   return (<>
 <div className="flex flex-col h-fit">

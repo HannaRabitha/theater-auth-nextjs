@@ -66,6 +66,28 @@ const page = async () => {
       </CardActionArea>
       </Card>
       </Link>
+
+
+      <Link href="/admin/quiz-list">
+        <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+        {/* <CardMedia
+          component="img"
+          height="140"
+          image="/assets/wayang-2.png"
+        /> */}
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Quiz Management
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Lizards are a widespread group of squamate reptiles, with over 6,000
+            species, ranging across all continents except Antarctica
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      </Card>
+        </Link>
         </div>
         </Container>
 

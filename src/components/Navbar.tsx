@@ -12,14 +12,58 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 
 
 const Navbar = async () => {
+
+  let isAdmin = false;
   const session = await getServerSession(authOptions);
 
-  const navigation = [
-    "Product",
-    "Features",
-    "Pricing",
-    "Company",
-    "Blog",
+  if (session?.user.name == 'admin') {
+    isAdmin = true;
+  }
+
+  const navUser = [
+    {
+      name: 'Home',
+      href: '/',
+      current: true
+    },
+    {
+      name: 'About',
+      href: '/about',
+      current: false
+    },
+    {
+      name: 'Content',
+      href: '/all-materi',
+      current: false
+    },
+    {
+      name: 'Take a Quiz',
+      href: '/quiz',
+      current: false
+    }
+  ];
+
+  const navAdmin = [
+    {
+      name: 'Home',
+      href: '/',
+      current: false
+    },
+    {
+      name: 'Admin',
+      href: '/admin',
+      current: true
+    },
+    {
+      name: 'Materi Management',
+      href: '/admin/materi-list',
+      current: false
+    },
+    {
+      name: 'Quiz Management',
+      href: '/admin/quiz-list',
+      current: false
+    }
   ];
 
 
@@ -53,7 +97,34 @@ const Navbar = async () => {
         </svg>
     </button> */}
   </div>
+
   <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+  {isAdmin? (
+    <>
+    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      {navAdmin.map((item) => (
+        <li key={item.name}>
+          <Link href={item.href} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#470E13] md:p-0 md:dark:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{item.name}</Link>
+        </li>
+      ))}
+      </ul>
+    </>
+  ): (
+    <>
+    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      {navUser.map((item) => (
+        <li key={item.name}>
+          <Link href={item.href} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#470E13] md:p-0 md:dark:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{item.name}</Link>
+        </li>
+      ))}
+      </ul>
+    </>
+  )}
+  </div>
+
+
+
+  {/* <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>
         <a href="/" className="block py-2 px-3 text-white bg-[#470E13] rounded md:bg-transparent md:text-[#470E13] md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
@@ -61,11 +132,17 @@ const Navbar = async () => {
       <li>
         <a href="/about" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#470E13] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
       </li>
-      {/* <li>
-        <a href="/contact" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#470E13] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-      </li> */}
+      <li>
+        <a href="/all-materi" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#470E13] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Content</a>
+      </li>
+      <li>
+        <a href="/quiz" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#470E13] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Take a Quiz</a>
+      </li>
     </ul>
-  </div>
+  </div> */}
+
+
+
   </div>
 </nav>
 </>
