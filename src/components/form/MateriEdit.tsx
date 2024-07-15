@@ -27,7 +27,7 @@ const MateriEditForm = ({params}: any) => {
     const [dataMateri, setDataMateri] = useState<any>({
         id: '',
         title: '',
-        category: '',
+        category: 'Content',
         description: '',
         link: ''
     });

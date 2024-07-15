@@ -9,13 +9,18 @@ const CardWithImage = async ({data}: any
 ) => {    
     const session = await getServerSession(authOptions);
 
+    const imgUrl = 'https://cdni.iconscout.com/illustration/premium/thumb/news-article-4427104-3685850.png';
+
   return (
     <>
       <div className="container mx-auto">
       <div className="relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
       <div className="z-0 order-1 md:order-2 relative w-full md:w-2/5 h-80 md:h-full overflow-hidden rounded-lg md:rounded-none md:rounded-r-lg">
-        <div className="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style={
+        {/* <div className="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style={
             {backgroundImage: `url(${data.imageUrl})`}
+        }></div> */}
+         <div className="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style={
+            {backgroundImage: `url(${imgUrl})`}
         }></div>
         <div className="md:hidden absolute inset-0 h-full p-6 pb-6 flex flex-col-reverse justify-start items-start bg-gradient-to-b from-transparent via-transparent to-gray-900">
             <h3 className="w-full font-bold text-2xl text-white leading-tight mb-2">{data.title}</h3>

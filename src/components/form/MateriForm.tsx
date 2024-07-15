@@ -40,8 +40,8 @@ const MateriForm = () => {
         defaultValues: {
             title: '',
             description: '',
-            category: 'abc',
-            link: 'link'
+            category: 'Content',
+            link: '/'
         },
     });
 
