@@ -17,15 +17,37 @@ import { IconButton, Radio } from "@mui/material";
 import { DeleteIcon, EditIcon, Link, TrashIcon } from "lucide-react";
 import { set } from "zod";
 import { Button } from '../ui/button';
+import { useSession, signIn, signOut } from "next-auth/react";
+import { Modal as BaseModal } from '@mui/base/Modal';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
-
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 const QuizForm = () => {
     
+    const { data: session, status } = useSession();
     const [rows, setRows] = useState<any[]>([]); // Updated to use useState
-    const [showModal, setShowModal] = useState(false); // Updated to use useState
     const [isLoading, setIsLoading] = useState(true); // Step 1: Initialize loading state
     const [dataQuestion, setDataQuestion] = useState<any>([]);
+
+    const [correctAnswer, setCorrectAnswer] = useState(0);
+    const [score, setScore] = useState(0);
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     
 
 
@@ -34,6 +56,9 @@ const QuizForm = () => {
         const fetchData = async () => {
             try {
                 setIsLoading(true); // Step 2: Set loading state to true
+
+
+
                 const response = await fetch('/api/quiz2'); // Adjust the API endpoint as needed
                 const data = await response.json();
                 console.log(data, 'data');
@@ -65,12 +90,80 @@ const QuizForm = () => {
                 answer2: item.answer2,
                 answer3: item.answer3,
                 answer4: item.answer4,
+                correctAnswer: item.correctAnswer,
                 userAnswer: null
             }
         });
         setDataQuestion(dataQuestion);
 
         
+    }
+
+    function onSubmit(){
+
+        let correctAnswer = 0;
+        let score = 0;
+
+        dataQuestion.forEach((item: any) => {
+            if(item.userAnswer == item.correctAnswer){
+                correctAnswer++;
+            }
+        });
+
+        score = (correctAnswer / dataQuestion.length) * 100;
+
+        setScore(parseFloat(score.toFixed(2)));
+        setCorrectAnswer(correctAnswer);
+
+    
+        const data = {
+            score: parseFloat(score.toFixed(2)),
+            trueAnswer: correctAnswer,
+            falseAnswer: dataQuestion.length - correctAnswer,
+            email: session?.user?.email
+        }
+        
+
+        const postData = async () => {
+            try {
+                const response = await fetch(`/api/score`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    setOpen(true);
+                    // const data = await response.json();
+                    // console.log(data, 'data');
+                    // toast({
+                    //     title: 'Success',
+                    //     description: 'Submit Quiz Success',
+                    //     variant: 'success'
+                    // })
+                  
+                    // window.location.reload();
+                } else {
+                    toast({
+                        title: 'Error',
+                        description: 'Submit Quiz Failed',
+                        variant: 'destructive'
+                    })
+                }
+            } catch (error) {
+                console.error("Failed to submit Quiz:", error);
+                toast({
+                    title: 'Error',
+                    description: 'Failed to submit Quiz',
+                    variant: 'destructive'
+                })
+            }
+        }
+
+        postData();
+        
+
     }
 
 
@@ -171,7 +264,10 @@ const QuizForm = () => {
             Batal
             </Button>
             
-          <Button className='w-full' type='submit'>
+          <Button className='w-full' type='submit'
+          onClick={() => onSubmit()}
+          variant='yellow'
+          >
           Simpan
         </Button>
           </div>
@@ -181,8 +277,41 @@ const QuizForm = () => {
         )}
 
     </Container>
+
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h4" component="h2">
+            Quiz Result
+          </Typography>
+          <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ mt: 2 }}>
+            Your Score: {score}%
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 0 }}>
+            {correctAnswer} correct answer out of {dataQuestion.length} question
+          </Typography>
+
+            <Button className='w-full mt-4' type='button'
+                onClick={() => window.location.replace('/')}>
+                Close
+            </Button>
+            <Button className='w-full mt-4' type='button'
+                variant='yellow'
+                onClick={() => window.location.replace('/quiz')}>
+                Try Again
+            </Button>
+
+            
+        </Box>
+      </Modal>
+
         </>
     );
 }
+
 
 export default QuizForm;

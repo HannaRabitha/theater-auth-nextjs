@@ -23,7 +23,6 @@ model User {
   role String
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
-  score Score[]
 }
 
 model Materi {
@@ -54,11 +53,10 @@ model Question {
 
 model Score {
   id     Int      @id @default(autoincrement())
-  score  Int
+  score  Float
   trueAnswer Int
   falseAnswer Int
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  email String
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }

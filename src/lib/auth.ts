@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
             }
 
             return {
-                id:  `{${existingUser.id}`,
+                id: existingUser.id,
                 email: existingUser.email,
                 name: existingUser.name,
                 kelas: existingUser.kelas,
@@ -69,14 +69,15 @@ export const authOptions: NextAuthOptions = {
             }
           return token
         },
-        async session({ session, token }) {
+        async session({ session, token, user }) {
 
             return {
                 ...session,
                 user: {
                     ...session.user,
-                    email: token.email
-                }
+                    email: token.email,
+
+                },
             }
         }
       }

@@ -58,7 +58,6 @@ const QuestionForm = () => {
 
     const onSubmit = async (values: z.infer<typeof FormSchema>) => {
       
-        // console.log(values);
 
         setLoading(true);
         const response = await fetch('/api/quiz', {

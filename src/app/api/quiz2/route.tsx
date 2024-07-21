@@ -11,6 +11,7 @@ export async function GET() {
             answer2: true,
             answer3: true,
             answer4: true,
+            correctAnswer: true,
         }
     });
     return NextResponse.json(questWithoutCorrectAnswer);
