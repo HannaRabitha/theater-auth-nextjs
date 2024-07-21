@@ -176,11 +176,11 @@ const MateriEditForm = ({params}: any) => {
         <FormGroup className='h-80'>
             <FormControl>
             <FormLabel htmlFor="title">Content</FormLabel>
-                <ReactQuill className='h-64 mt-1' theme="snow" value={dataMateri.description}
+            <ReactQuill className='h-64 mt-1' theme="snow" value={dataMateri.description}
                 onChange={(value) => {
                     setDataMateri({
                         ...dataMateri,
-                        content: value
+                        description: value
                     })
                 }}
                 placeholder='Isi Konten Materi' />
