@@ -11,6 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import { Button } from '../ui/button';
+import { fetchData } from 'next-auth/client/_utils';
 
 
 //   const FormSchema = z.object({
@@ -75,25 +76,9 @@ const MateriEditForm = ({params}: any) => {
     }, [id]); //
 
 
-    async function getImages() {
-
-        console.log('getImages');
-        
-        const { data, error } = await supabase.storage
-        .from('imageMateri')
-        .list('public/'+id + "/", {
-            limit: 100,
-            offset: 0
-        });
-
-        if (data) {
-            console.log(data);
-        } else {
-            console.log(error);
-        }
-    }
 
   async function uploadImage(e:any) {
+    setLoading(true);
 
     let file = e.target.files[0];
 
@@ -107,14 +92,16 @@ const MateriEditForm = ({params}: any) => {
     });
 
     if (response.ok) {
+        toast({
+            title: 'Success',
+            description: 'Image uploaded successfully',
+            variant: 'default'
+        });
 
-        getImages();
-        // toast({
-        //     title: 'Success',
-        //     description: 'Image uploaded successfully',
-        //     variant: 'default'
-        // });
+        //reload fetch data
+        window.location.reload();
     } else {
+        setLoading(false);
         toast({
             title: 'Error',
             description: 'Failed to upload image',
@@ -191,7 +178,16 @@ const MateriEditForm = ({params}: any) => {
             <FormControl>
             <FormLabel htmlFor="title">Image</FormLabel>
 
-                <Input type="file" id="image" onChange={
+                {/* <Input type="file" name='image' onChange={
+                    (e) => {
+                        uploadImage(e);
+                    }
+                
+                } /> */}
+
+                <input type="file" accept='
+               image/jpeg, image/png, image/jpg
+                ' name='image' onChange={
                     (e) => {
                         uploadImage(e);
                     }
@@ -199,6 +195,10 @@ const MateriEditForm = ({params}: any) => {
                 } />
             </FormControl>
         </FormGroup>
+
+        {dataMateri.link && (
+            <img src={dataMateri.link} alt="image" className='w-full h-fit' />
+        )}
 
         <div className='flex mt-20 gap-4'>
         <Button className='w-full' type='button' onClick={() => router.push('/admin/materi-list')}>

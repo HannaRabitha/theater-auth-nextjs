@@ -45,14 +45,25 @@ export async function POST(req: Request) {
       }
       
       // Store image reference in your database using Prisma
-      const imageReference = await db.images.create({
+      // const imageReference = await db.images.create({
+      //   data: {
+      //     url: 
+      //     `${
+      //       process.env.NEXT_PUBLIC_SUPABASE_URL
+      //       }/storage/v1/object/public/imageMateri/public/${_materiId}/${newFileName}`,
+      //     materiId: parseInt(materiId),
+      //   },
+      // });
+
+      const imageReference = await db.materi.update({
+        where: {
+          id: _materiId,
+        },
         data: {
-          // Assuming you have a URL or path field
-          url: 
+          link: 
           `${
             process.env.NEXT_PUBLIC_SUPABASE_URL
             }/storage/v1/object/public/imageMateri/public/${_materiId}/${newFileName}`,
-          materiId: parseInt(materiId),
         },
       });
 

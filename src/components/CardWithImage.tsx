@@ -19,9 +19,15 @@ const CardWithImage = async ({data}: any
         {/* <div className="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style={
             {backgroundImage: `url(${data.imageUrl})`}
         }></div> */}
-         <div className="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style={
-            {backgroundImage: `url(${imgUrl})`}
-        }></div>
+        {
+          !data.link ? (
+            <div className="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style={
+              {backgroundImage: `url(${imgUrl})`}
+          }></div>
+          ): ( <div className="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style={
+            {backgroundImage: `url(${data.link})`}
+        }></div>)
+        }
         <div className="md:hidden absolute inset-0 h-full p-6 pb-6 flex flex-col-reverse justify-start items-start bg-gradient-to-b from-transparent via-transparent to-gray-900">
             <h3 className="w-full font-bold text-2xl text-white leading-tight mb-2">{data.title}</h3>
             <h4 className="w-full text-xl text-gray-100 leading-tight">{data.category}</h4>

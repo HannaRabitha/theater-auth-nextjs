@@ -26,7 +26,7 @@ const FormSchema = z.object({
     title: z.string().min(1, 'Title is required'),
     description: z.string().min(1, 'Content is required'),
     category: z.string().min(1, 'Category is required'),
-    link  : z.string().min(1, 'Link is required'),
+    link  : z.string()
 });
 
 
@@ -41,7 +41,7 @@ const MateriForm = () => {
             title: '',
             description: '',
             category: 'Content',
-            link: '/'
+            link: ''
         },
     });
 
